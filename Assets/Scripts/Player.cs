@@ -1,13 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{
+{   
+    //// CONFIGURATION PARAMETERS -------------------------------
     //Creamos un campo para configurar la velocidad de movimiento
     [SerializeField] float moveSpeed = 10f;
     //Creamos un campo para configurar el padding de los límites al movimiento
     [SerializeField] float padding = 1f;
+    [SerializeField] GameObject laserPrefab;
+    [SerializeField] float projectileSpeed = 10f;
 
     float xMin;
     float xMax;
@@ -21,28 +25,29 @@ public class Player : MonoBehaviour
         SetUpMoveBoundaries();
     }
 
-    private void SetUpMoveBoundaries()
-    {
-        // Almacenamos la cámara principal en gameCamera. Es de tipo Camara
-        Camera gameCamera = Camera.main;
-
-        //ViewportToWorldPoint -> convierte la posición de algo en su relación a lo que ve la cámara a un valor de espacio
-        //fijamos un minimo y un máximo de x (de 0 a 1)
-        //el método toma un vector3(x,y,z) - acá solo usamos x por eso dejamos en 0 los demás.
-        //se almacena cuál es el "world space value" de x en relación con el ViewportValue de x en la cámara
-        //pasamos el value del padding en minimo se lo sumamos (porque es negativo) en máximo se lo restamos)
-        xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + padding;
-        xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - padding;
-
-        //Eje Y
-        yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
-        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
-    }
+    
 
     // Update is called once per frame
     void Update()
     {
         Move();
+        Fire();
+    }
+
+    private void Fire()
+    {
+        //A GetButtonDown le pasamos un string con el nombre del input. Para ver el input hay que ir a Edit->ProjectSettings->Input Manager
+        if (Input.GetButtonDown("Fire1"))
+        {
+            //Instanciamos el GameObject con el método Instantiate y creando una nueva variable de tipo gameObject. El "as" sirve para reasegurar que es un GObject.
+            //El primer param es el gameObject
+            //El segundo param es la posición donde lo instanciamos. Allí queremos que esté.
+            //El tercer param es la rotación. En este caso Quaternion.identity -> usa la rotación que tiene por default.
+            GameObject laser = Instantiate(laserPrefab, transform.position, Quaternion.identity) as GameObject;
+
+            //Una vez instanciado el objeto laser accedemos al componente RigidBody2d y afectamos su velocidad con un objeto Vector2 de x = 0 e y = projectileSpeed
+            laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+        }
     }
 
     private void Move()
@@ -67,5 +72,23 @@ public class Player : MonoBehaviour
         transform.position = new Vector2(newXPos, newYPos);
 
 
+    }
+
+    private void SetUpMoveBoundaries()
+    {
+        // Almacenamos la cámara principal en gameCamera. Es de tipo Camara
+        Camera gameCamera = Camera.main;
+
+        //ViewportToWorldPoint -> convierte la posición de algo en su relación a lo que ve la cámara a un valor de espacio
+        //fijamos un minimo y un máximo de x (de 0 a 1)
+        //el método toma un vector3(x,y,z) - acá solo usamos x por eso dejamos en 0 los demás.
+        //se almacena cuál es el "world space value" de x en relación con el ViewportValue de x en la cámara
+        //pasamos el value del padding en minimo se lo sumamos (porque es negativo) en máximo se lo restamos)
+        xMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).x + padding;
+        xMax = gameCamera.ViewportToWorldPoint(new Vector3(1, 0, 0)).x - padding;
+
+        //Eje Y
+        yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
+        yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
     }
 }
