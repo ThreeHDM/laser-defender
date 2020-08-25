@@ -23,6 +23,9 @@ public class Player : MonoBehaviour
     {
         //creamos los limites para que el usuario no pueda moverse fuera de la cámara
         SetUpMoveBoundaries();
+
+        StartCoroutine(PrintSth());
+
     }
 
     
@@ -32,6 +35,13 @@ public class Player : MonoBehaviour
     {
         Move();
         Fire();
+    }
+
+    IEnumerator PrintSth()
+    {
+        Debug.Log("primero");
+        yield return new WaitForSeconds(3);
+        Debug.Log("segundo");
     }
 
     private void Fire()
