@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     [SerializeField] float padding = 1f;
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float projectileSpeed = 10f;
+    [SerializeField] float projectileFiringPeriod = 0.1f;
+
+    //Creamos la variable para almacenar la corutina de disparo
+    Coroutine firingCoroutine;
 
     float xMin;
     float xMax;
@@ -24,7 +28,6 @@ public class Player : MonoBehaviour
         //creamos los limites para que el usuario no pueda moverse fuera de la cámara
         SetUpMoveBoundaries();
 
-        StartCoroutine(PrintSth());
 
     }
 
@@ -36,18 +39,33 @@ public class Player : MonoBehaviour
         Move();
         Fire();
     }
-
-    IEnumerator PrintSth()
-    {
-        Debug.Log("primero");
-        yield return new WaitForSeconds(3);
-        Debug.Log("segundo");
-    }
-
+       
     private void Fire()
     {
         //A GetButtonDown le pasamos un string con el nombre del input. Para ver el input hay que ir a Edit->ProjectSettings->Input Manager
         if (Input.GetButtonDown("Fire1"))
+        {
+            //Comenzamos la Couroutine y la almacenamos en la variable de tipo Couroutine
+            firingCoroutine = StartCoroutine(FireContinously());
+        }
+        if (Input.GetButtonUp("Fire1"))
+        {
+            /*
+            //Este método detiene a todas las coroutines. Es peligroso pues detiene todo
+            StopAllCoroutines();
+            */
+
+            //Este método detiene una coroutine específica
+            StopCoroutine(firingCoroutine);
+            
+        }
+    }
+
+    //Creamos el metodo courotine y colocamos la instanciacion del objeto GameObject laser
+    IEnumerator FireContinously()
+    {
+        //Una vez que se llama FireContinously todo dentro del while se repetirá siempre
+        while (true)
         {
             //Instanciamos el GameObject con el método Instantiate y creando una nueva variable de tipo gameObject. El "as" sirve para reasegurar que es un GObject.
             //El primer param es el gameObject
@@ -57,7 +75,10 @@ public class Player : MonoBehaviour
 
             //Una vez instanciado el objeto laser accedemos al componente RigidBody2d y afectamos su velocidad con un objeto Vector2 de x = 0 e y = projectileSpeed
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
+
+            yield return new WaitForSeconds(projectileFiringPeriod);
         }
+        
     }
 
     private void Move()
