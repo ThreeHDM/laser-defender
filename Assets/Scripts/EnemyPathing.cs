@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour
 {
+    [SerializeField] WaveConfig waveConfig;
     //El tipo es Transform porque queremos afectar la position
-    [SerializeField] List<Transform> waypoints;
+    List<Transform> waypoints;
     //Velocidad del enemigo al moverse
     [SerializeField] float moveSpeed = 2f;
     //creamos un índice para los waypoints
@@ -14,6 +15,8 @@ public class EnemyPathing : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        waypoints = waveConfig.GetWayPoints();
+
         //Afectamos la position del Enemy (ya que este script está asociado a ese GObject) asignado la posicion del waypoint del indice en que estamos (el 0)
         transform.position = waypoints[waypointIndex].transform.position;
     }

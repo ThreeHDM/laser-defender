@@ -16,7 +16,20 @@ public class WaveConfig : ScriptableObject
 
     //Creamos los getters
     public GameObject GetEnemyPrefab() { return enemyPrefab;}
-    public GameObject GetPathPrefab() { return pathPrefab; }
+    
+    public List<Transform> GetWayPoints() //renombramos para retornar los waypoints y cambiamos el tipo a List de type Transform.
+    {
+
+        var waveWayPoints = new List<Transform>(); //creamos la variable a retornar. En ella instanciamos un objecto de tipo List<Transform>();
+
+        foreach (Transform child in pathPrefab.transform)
+        {
+            waveWayPoints.Add(child);
+        }
+
+        return waveWayPoints;
+    }
+
     public float GetTimeBetweenSpawns() { return timeBetweenSpawns; }
     public float GetSpawnRandomFactor() { return spawnRandomFactor; }
     public int GetNumberOfEnemies() { return numberOfEnemies; }
