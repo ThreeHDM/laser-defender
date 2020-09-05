@@ -22,12 +22,13 @@ public class WaveConfig : ScriptableObject
 
         var waveWayPoints = new List<Transform>(); //creamos la variable a retornar. En ella instanciamos un objecto de tipo List<Transform>();
 
-        foreach (Transform child in pathPrefab.transform)
+
+        foreach (Transform child in pathPrefab.transform) //Estamos accediendo a path. Como Path es el parent para acceder a sus child usamos Transform Child: declaramos el tipo de child como Transform.
         {
-            waveWayPoints.Add(child);
+            waveWayPoints.Add(child); //agregamos el child a la lista de tipo Transform.
         }
 
-        return waveWayPoints;
+        return waveWayPoints; // retornamos la lista de nuestro pathPrefab
     }
 
     public float GetTimeBetweenSpawns() { return timeBetweenSpawns; }
