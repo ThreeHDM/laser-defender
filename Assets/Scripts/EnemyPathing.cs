@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class EnemyPathing : MonoBehaviour
 {
-    // Conectamos nuestro waveConfig. Usamos el tipo WaveConfig del Scriptableobject. Al hacer esto removemos el [SerializeField] de la propiedad wayPoints
-    [SerializeField] WaveConfig waveConfig; 
+    //Removemos el SerializeField de waveConfig
+    WaveConfig waveConfig; 
     //El tipo es Transform porque queremos afectar la position
     List<Transform> waypoints; 
     //Velocidad del enemigo al moverse
-    [SerializeField] float moveSpeed = 2f;
+    
     //creamos un índice para los waypoints
     int waypointIndex = 0;
 
@@ -28,6 +28,12 @@ public class EnemyPathing : MonoBehaviour
         Move();
     }
 
+    //Creamos este método público para setear el waveConfig (Setter)
+    public void SetWaveConfig(WaveConfig waveConfig)
+    {
+        this.waveConfig = waveConfig; //Me refiero a la class con this y seteo la propiedad con el param que me pasen en SetWaveConfig()
+    }
+
     private void Move()
     {
         //Usamos Count para las listas. Si fuera un array usamos length. Restamos uno porque count cuenta desde 1. En este caso son 3 waypoints menos 1. Osea 0,1,2 elementos de la lista.
@@ -37,7 +43,7 @@ public class EnemyPathing : MonoBehaviour
             var targetPosition = waypoints[waypointIndex].transform.position;
 
             //Esta es la velocidad. Multiplicamos por Time.deltaTime para que sea frame independent
-            var movementThisFrame = moveSpeed * Time.deltaTime;
+            var movementThisFrame = waveConfig.GetMoveSpeed() * Time.deltaTime;
 
             //este método usa param1: posicion actual, param2: posicion a la que va, param3: 
             //MoveTowards(Vector2 current, Vector2 target, float maxDistanceDelta);

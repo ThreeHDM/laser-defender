@@ -21,17 +21,22 @@ public class EnemySpawner : MonoBehaviour
     {
         for (int enemyCount = 0; enemyCount < waveConfig.GetNumberOfEnemies(); enemyCount++)
         {
-         
+
+
+
             //Debug.Log(enemyCount);
-         
-             //Instanciamos el Enemy con Instantiate()
-             //El primer param de Instantiate es el gameObject
-             //El segundo param es la posición donde lo instanciamos. Allí queremos que esté.
-             //El tercer param es la rotación. En este caso Quaternion.identity -> usa la rotación que tiene por default.
-             Instantiate(
+
+            //Instanciamos el Enemy con Instantiate()
+            //El primer param de Instantiate es el gameObject
+            //El segundo param es la posición donde lo instanciamos. Allí queremos que esté.
+            //El tercer param es la rotación. En este caso Quaternion.identity -> usa la rotación que tiene por default.
+            var newEnemy = Instantiate(
                 waveConfig.GetEnemyPrefab(),
                 waveConfig.GetWayPoints()[0].transform.position, //retornamos el waypoint 0 del way config porque esta es la posición inicial. GetWayPoints retorna una lista y por eso usamos los brackets.
                 Quaternion.identity);
+
+            //Accedemos al componente EnemyPathing y luego al método público SetWaveConfig y pasamos el waveConfig en su param.
+            newEnemy.GetComponent<EnemyPathing>().SetWaveConfig(waveConfig);
 
              //Debug.Log(waveConfig.GetTimeBetweenSpawns());
              yield return new WaitForSeconds(waveConfig.GetTimeBetweenSpawns());
