@@ -7,11 +7,17 @@ public class EnemySpawner : MonoBehaviour
 
     [SerializeField] List<WaveConfig> waveConfigs; //creamos esta prop para almacenar las configs de las waves
     [SerializeField] int startingWave = 0; // el indice de las waves
+    [SerializeField] bool looping = false;
 
-    // Start is called before the first frame update
-    void Start()
+    // convertimos a Start() en una courroutine para crear un do..while loop
+    IEnumerator Start()
     {
-        StartCoroutine(SpawnAllWaves());
+        //Cuando el motor llame a start() hace esto: inicia una corrutina. Hasta que while sea false.
+        do
+        {
+            yield return StartCoroutine(SpawnAllWaves());
+        }
+        while (looping);
     }
 
     //creamos una coroutine para invocar las waves
