@@ -6,14 +6,23 @@ public class EnemySpawner : MonoBehaviour
 {
 
     [SerializeField] List<WaveConfig> waveConfigs; //creamos esta prop para almacenar las configs de las waves
-    int startingWave = 0; // el indice de las waves
+    [SerializeField] int startingWave = 0; // el indice de las waves
 
     // Start is called before the first frame update
     void Start()
     {
-        var currentWave = waveConfigs[startingWave];
-        Debug.Log(currentWave);
-        StartCoroutine(SpawnAllEnemiesInWave(currentWave));
+        StartCoroutine(SpawnAllWaves());
+    }
+
+    //creamos una coroutine para invocar las waves
+    private IEnumerator SpawnAllWaves()
+    {
+        //Escribimos un bucle for. Creamos waveIndex y lo inicializamos igual a la propiedad startingWave. Como waveconfigs es una lista podemos usar Count para conocer su numero de elementos
+        for (int waveIndex = startingWave; waveIndex < waveConfigs.Count; waveIndex++)
+        {
+            var currentWave = waveConfigs[waveIndex];
+            yield return StartCoroutine(SpawnAllEnemiesInWave(currentWave));
+        }
     }
 
     //Creamos la coroutine (Es un método que suspende su ejecución hasta que se cumpla una condición). Pasamos el waveconfig de la current wave como param
