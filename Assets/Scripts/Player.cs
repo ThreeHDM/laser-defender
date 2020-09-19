@@ -6,10 +6,14 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {   
     //// CONFIGURATION PARAMETERS -------------------------------
+    [Header("Player")] // agrega un header
     //Creamos un campo para configurar la velocidad de movimiento
     [SerializeField] float moveSpeed = 10f;
     //Creamos un campo para configurar el padding de los límites al movimiento
     [SerializeField] float padding = 1f;
+    [SerializeField] int health = 200;
+
+    [Header("Projectile")] // agrega un header
     [SerializeField] GameObject laserPrefab;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileFiringPeriod = 0.1f;
@@ -39,7 +43,23 @@ public class Player : MonoBehaviour
         Move();
         Fire();
     }
-       
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        DamageDealer damageDealer = other.gameObject.GetComponent<DamageDealer>();
+        ProcessHit(damageDealer);
+    }
+
+    private void ProcessHit(DamageDealer damageDealer)
+    {
+        health -= damageDealer.GetDamage();
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
     private void Fire()
     {
         //A GetButtonDown le pasamos un string con el nombre del input. Para ver el input hay que ir a Edit->ProjectSettings->Input Manager
@@ -122,4 +142,6 @@ public class Player : MonoBehaviour
         yMin = gameCamera.ViewportToWorldPoint(new Vector3(0, 0, 0)).y + padding;
         yMax = gameCamera.ViewportToWorldPoint(new Vector3(0, 1, 0)).y - padding;
     }
+
+    
 }

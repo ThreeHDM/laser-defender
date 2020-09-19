@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4338584689568245530}
   - component: {fileID: 4338584689568245529}
   - component: {fileID: 4338584689568245531}
+  - component: {fileID: 4063142809536367027}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -97,6 +98,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 10
   padding: 1
-  laserPrefab: {fileID: 8262910179399186299, guid: 38e0765f67424134ca0c5aaf6baed4c3, type: 3}
+  health: 200
+  laserPrefab: {fileID: 8262910179399186299, guid: ed3177a7f8b247843bc49e12b33b83d4, type: 3}
   projectileSpeed: 10
   projectileFiringPeriod: 0.08
+--- !u!58 &4063142809536367027
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4338584689568245528}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.010633945, y: -0.0015192032}
+  serializedVersion: 2
+  m_Radius: 0.37346935
