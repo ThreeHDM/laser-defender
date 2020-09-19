@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 4338584689568245530}
   - component: {fileID: 4338584689568245529}
   - component: {fileID: 4338584689568245531}
-  - component: {fileID: 4063142809536367027}
-  m_Layer: 0
+  - component: {fileID: -7439617043759568081}
+  m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,8 +102,8 @@ MonoBehaviour:
   laserPrefab: {fileID: 8262910179399186299, guid: ed3177a7f8b247843bc49e12b33b83d4, type: 3}
   projectileSpeed: 10
   projectileFiringPeriod: 0.08
---- !u!58 &4063142809536367027
-CircleCollider2D:
+--- !u!60 &-7439617043759568081
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -115,6 +115,35 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.010633945, y: -0.0015192032}
-  serializedVersion: 2
-  m_Radius: 0.37346935
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.99, y: 0.75}
+    newSize: {x: 0.99, y: 0.75}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.4706939, y: 0.05512047}
+      - {x: 0.3722245, y: -0.031722568}
+      - {x: 0.1098087, y: 0.1043552}
+      - {x: 0.08334953, y: 0.36588478}
+      - {x: -0.06854078, y: 0.375}
+      - {x: -0.10550254, y: 0.11284733}
+      - {x: -0.2680383, y: 0.022464216}
+      - {x: -0.37352717, y: -0.038701057}
+      - {x: -0.46847674, y: 0.049851418}
+      - {x: -0.47980863, y: 0.046388358}
+      - {x: -0.46461737, y: -0.24803935}
+      - {x: -0.4098086, y: -0.2090427}
+      - {x: -0.12855102, y: -0.25508308}
+      - {x: -0.11765561, y: -0.2798089}
+      - {x: -0.08353589, y: -0.35872746}
+      - {x: -0.058540788, y: -0.3719616}
+      - {x: 0.06550254, y: -0.3719616}
+      - {x: 0.13043118, y: -0.2667705}
+      - {x: 0.37296686, y: -0.20119631}
+      - {x: 0.45854083, y: -0.2641152}
