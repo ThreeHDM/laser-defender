@@ -12,6 +12,10 @@ public class Player : MonoBehaviour
     //Creamos un campo para configurar el padding de los límites al movimiento
     [SerializeField] float padding = 1f;
     [SerializeField] int health = 200;
+    [SerializeField] AudioClip deathSoud;
+    [SerializeField] [Range(0, 1)] float deathSoundVolume = 0.7f;
+    [SerializeField] AudioClip shootSound;
+    [SerializeField] [Range(0, 1)] float shootSoundVolume = 0.25f;
 
     [Header("Projectile")] // agrega un header
     [SerializeField] GameObject laserPrefab;
@@ -57,8 +61,14 @@ public class Player : MonoBehaviour
         damageDealer.Hit();
         if (health <= 0)
         {
-            Destroy(gameObject);
+            Die();
         }
+    }
+
+    private void Die()
+    {
+        Destroy(gameObject);
+        AudioSource.PlayClipAtPoint(deathSoud, Camera.main.transform.position, deathSoundVolume); 
     }
 
     private void Fire()
@@ -96,7 +106,7 @@ public class Player : MonoBehaviour
 
             //Una vez instanciado el objeto laser accedemos al componente RigidBody2d y afectamos su velocidad con un objeto Vector2 de x = 0 e y = projectileSpeed
             laser.GetComponent<Rigidbody2D>().velocity = new Vector2(0, projectileSpeed);
-
+            AudioSource.PlayClipAtPoint(shootSound, Camera.main.transform.position, shootSoundVolume);
             yield return new WaitForSeconds(projectileFiringPeriod);
         }
         
