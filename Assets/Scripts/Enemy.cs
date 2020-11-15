@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-
+    [Header("Enemy Stats")]
     [SerializeField] float health = 100;
+    [SerializeField] int scoreValue = 150;
+
+    [Header("Shooting")]
     [SerializeField] float shotCounter;
     [SerializeField] float minTimeBetweenShots = 0.2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] GameObject projectile;
     [SerializeField] float projectileSpeed = 10f;
     [SerializeField] float projectileFiringPeriod = 0.1f;
+
+    [Header("Sound Effects")]
     [SerializeField] GameObject deathVFX;
     [SerializeField] float durationOfExplosion = 1f;
     [SerializeField] AudioClip deathSoud;
@@ -73,7 +78,9 @@ public class Enemy : MonoBehaviour
     }
 
     private void Die()
-    {
+    {   
+        //Conf FindObjectOfype accedo a los métodos de otra clase
+        FindObjectOfType<GameSession>().AddToScore(scoreValue);
         Destroy(gameObject);
         GameObject explosion = Instantiate(deathVFX, transform.position, transform.rotation);
         Destroy(explosion, durationOfExplosion);

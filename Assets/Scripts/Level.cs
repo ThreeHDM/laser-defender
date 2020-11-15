@@ -16,7 +16,7 @@ public class Level : MonoBehaviour
     {
         // Se puede cargar una escena con strings o con el scene index. El problema con los strings es que no son escalables. Si cambia el nombre de la escena no cambia
         SceneManager.LoadScene("Game");
-        Debug.Log("test");
+        FindObjectOfType<GameSession>().ResetGame();
     }
 
     public void LoadGameOver()
