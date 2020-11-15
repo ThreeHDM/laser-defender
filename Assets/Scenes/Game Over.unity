@@ -294,7 +294,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Laser Defender
+  m_text: Game Over
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 699347ca6eccafa4e82e137638d1af2a, type: 2}
   m_sharedMaterial: {fileID: 5775857199532691794, guid: 699347ca6eccafa4e82e137638d1af2a, type: 2}
@@ -303,8 +303,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294835968
-  m_fontColor: {r: 0, g: 1, b: 0.9910369, a: 1}
+    rgba: 4278246911
+  m_fontColor: {r: 1, g: 0.868332, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -465,7 +465,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1035383731}
         m_TargetAssemblyTypeName: Level, Assembly-CSharp
-        m_MethodName: QuitGame
+        m_MethodName: LoadStartMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -495,7 +495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Quit
+  m_text: Main Menu
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ade77c48470929e4abf28ced1d6ff708, type: 2}
   m_sharedMaterial: {fileID: 3489913729927005, guid: ade77c48470929e4abf28ced1d6ff708, type: 2}
@@ -504,8 +504,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4286874756
-  m_fontColor: {r: 0.5188679, g: 0.5188679, b: 0.5188679, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -742,7 +742,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Start
+  m_text: Play Again
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ade77c48470929e4abf28ced1d6ff708, type: 2}
   m_sharedMaterial: {fileID: 3489913729927005, guid: ade77c48470929e4abf28ced1d6ff708, type: 2}
@@ -769,8 +769,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 160
-  m_fontSizeBase: 160
+  m_fontSize: 120
+  m_fontSizeBase: 120
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -910,7 +910,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 129, y: 139}
+  m_AnchoredPosition: {x: 129, y: 228}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1989892526
@@ -933,7 +933,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Save the universe
+  m_text: "You were not the \nchosen one"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ec26afa1cda3ffa43913e3cf3cb56d9a, type: 2}
   m_sharedMaterial: {fileID: -2614012380999821077, guid: ec26afa1cda3ffa43913e3cf3cb56d9a, type: 2}
@@ -942,8 +942,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294835968
-  m_fontColor: {r: 0, g: 1, b: 0.9910369, a: 1}
+    rgba: 4278255575
+  m_fontColor: {r: 0.843776, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

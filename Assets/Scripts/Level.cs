@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Level : MonoBehaviour
 {
+    [SerializeField] float delayInSeconds = 2f;
     public void LoadStartMenu()
     {
         SceneManager.LoadScene(0);
@@ -20,6 +21,15 @@ public class Level : MonoBehaviour
 
     public void LoadGameOver()
     {
+        //Cuando se llame este método (LoadgameOver) llamamos una corrutina
+        StartCoroutine(WaitAndLoad());
+        
+    }
+
+    IEnumerator WaitAndLoad()
+    {
+        //se espera la cantidad de segundos y luego se carga la escena
+        yield return new WaitForSeconds(delayInSeconds);
         SceneManager.LoadScene("Game Over");
     }
 
