@@ -72,6 +72,11 @@ public class Player : MonoBehaviour
         AudioSource.PlayClipAtPoint(deathSoud, Camera.main.transform.position, deathSoundVolume); 
     }
 
+    public int GetHealth()
+    {
+        return health;
+    }
+
     private void Fire()
     {
         //A GetButtonDown le pasamos un string con el nombre del input. Para ver el input hay que ir a Edit->ProjectSettings->Input Manager
