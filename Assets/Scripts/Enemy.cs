@@ -9,12 +9,11 @@ public class Enemy : MonoBehaviour
     [SerializeField] int scoreValue = 150;
 
     [Header("Shooting")]
-    [SerializeField] float shotCounter;
+    float shotCounter;
     [SerializeField] float minTimeBetweenShots = 0.2f;
     [SerializeField] float maxTimeBetweenShots = 3f;
     [SerializeField] GameObject projectile;
     [SerializeField] float projectileSpeed = 10f;
-    [SerializeField] float projectileFiringPeriod = 0.1f;
 
     [Header("Sound Effects")]
     [SerializeField] GameObject deathVFX;
@@ -23,6 +22,8 @@ public class Enemy : MonoBehaviour
     [SerializeField][Range(0,1)] float deathSoundVolume = 0.7f;
     [SerializeField] AudioClip shootSound;
     [SerializeField] [Range(0, 1)] float shootSoundVolume = 0.25f;
+    [SerializeField] AudioClip hitSound;
+    [SerializeField] [Range(0, 1)] float hitSoundVolume = 0.25f;
 
     // Start is called before the first frame update
     void Start()
@@ -71,6 +72,7 @@ public class Enemy : MonoBehaviour
     {
         health -= damageDealer.GetDamage();
         damageDealer.Hit();
+        AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position, hitSoundVolume);
         if (health <= 0)
         {
             Die();

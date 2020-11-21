@@ -16,6 +16,10 @@ public class Player : MonoBehaviour
     [SerializeField] [Range(0, 1)] float deathSoundVolume = 0.7f;
     [SerializeField] AudioClip shootSound;
     [SerializeField] [Range(0, 1)] float shootSoundVolume = 0.25f;
+    [SerializeField] AudioClip hitSound;
+    [SerializeField] [Range(0, 1)] float hitSoundVolume = 0.7f;
+
+    [SerializeField] GameObject hitVFX;
 
     [Header("Projectile")] // agrega un header
     [SerializeField] GameObject laserPrefab;
@@ -57,11 +61,16 @@ public class Player : MonoBehaviour
 
     private void ProcessHit(DamageDealer damageDealer)
     {
+        AudioSource.PlayClipAtPoint(hitSound, Camera.main.transform.position, hitSoundVolume);
+        
         health -= damageDealer.GetDamage();
         damageDealer.Hit();
         if (health <= 0)
         {
             Die();
+        } else
+        {
+            GameObject explosion = Instantiate(hitVFX, transform.position, transform.rotation);
         }
     }
 
